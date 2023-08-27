@@ -1,0 +1,16 @@
+#Run commands:
+#docker pull  docker pull postgres:alpine
+#docker-compose up -d
+version: '3'
+services:
+  postgesdb:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: '1'
+      POSTGRES_USER: 'postgres'
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/data/db
