@@ -70,4 +70,16 @@ export class AuthService {
 
     return { email: user.email };
   }
+
+  async getUser(JWTToken: string) {
+    const isCorrectToken = this.jwtService.verify(JWTToken);
+    const data: any = this.jwtService.decode(JWTToken);
+    const user = await this.userRepository.findOne({
+      where: { email: data.email },
+    });
+    return {
+      user,
+      isCorrectToken,
+    };
+  }
 }

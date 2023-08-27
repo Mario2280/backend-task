@@ -28,4 +28,9 @@ export class AuthController {
     );
     return this.authService.login(email);
   }
+
+  @Post('getUser')
+  async getUser(@Body() body: any) {
+    return await this.authService.getUser(body.jwt);
+  }
 }
