@@ -3,9 +3,9 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { Comment } from 'src/user/models/comment.model';
-import { Task } from 'src/user/models/task.model';
-import { Account } from 'src/user/models/user.model';
+import { Comment } from '../roots/comment/entities/comment.entity';
+import { Task } from '../roots/task/entities/task.entity';
+import { User } from '../roots/user/entities/user.entity';
 export const getPostgresConfig = (): TypeOrmModuleAsyncOptions => ({
   useFactory: (configService: ConfigService): TypeOrmModuleOptions => ({
     type: 'postgres',
@@ -13,8 +13,8 @@ export const getPostgresConfig = (): TypeOrmModuleAsyncOptions => ({
     port: configService.get('POSTGRES_PORT'),
     username: configService.get('POSTGRES_USER'),
     password: configService.get('POSTGRES_PASSWORD'),
-    database: configService.get('POSTGRES_DB'),
-    entities: [Account, Task, Comment],
+    database: configService.get('POSTGRES_DATABASE'),
+    entities: [User, Task, Comment],
     synchronize: true,
   }),
   imports: [ConfigModule],
